@@ -16,7 +16,7 @@ function SettingsProvider({ children }) {
     
     // Divides the volume by these numbers
     const volumeModifier = 5;
-    const tickVolumeModifier = 10;
+    const tickVolumeModifier = 50;
 
     const [showAnalog, setShowAnalog] = useStickyState(true, 'clock-app-show-analog', (value) => {
         // If we dont' want analog, then make sure digital is shown;

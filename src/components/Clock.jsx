@@ -110,7 +110,7 @@ function Clock() {
         }
 
         // Handle the bells on the hour
-        else if (mins === 0) {
+        else if (mins === 0 && secs === 0) {
             console.log(`Playing ${hrs} hour bell`);
             playing = true;
             playBells['hour' + hrs]();
@@ -133,7 +133,8 @@ function Clock() {
         const newSeconds = currentTime.getSeconds() < 10 ? '0' + currentTime.getSeconds() : currentTime.getSeconds();
         const newMinutes = currentTime.getMinutes() < 10 ? '0' + currentTime.getMinutes() : currentTime.getMinutes();
         const newAmPm = currentTime.getHours() > 12 ? 'PM' : 'AM';
-        const newTwelveHour = (isTwelveHour && currentTime.getHours() > 12) ? currentTime.getHours() - 12 : currentTime.getHours();
+        let newTwelveHour = (isTwelveHour && currentTime.getHours() > 12) ? currentTime.getHours() - 12 : currentTime.getHours();
+        newTwelveHour = newTwelveHour === 0 ? 12 : newTwelveHour;
         setSeconds(newSeconds);
         setMinutes(newMinutes);
         setTwelveHour(newTwelveHour);

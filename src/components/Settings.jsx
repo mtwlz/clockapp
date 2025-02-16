@@ -32,16 +32,22 @@ function Settings() {
             <div className="subtitle">Settings</div>
 
             {/* Sounds On/Off */}
-            <Checkbox
-                name="sound-checkbox"
-                checked={isSound}
-                size={20}
-                label="Enable Sound"
-                onChange={() => setIsSound(!isSound)}
-            />
+            <div style={{ display: 'flex', gap: '10px' }}>
+                <Checkbox
+                    name="sound-checkbox"
+                    checked={isSound}
+                    size={20}
+                    label="Enable Sound"
+                    onChange={() => setIsSound(!isSound)}
+                />
 
-            {/* Test button */}
-            <button onClick={() => playMinute15()}>Test Minute 15</button>
+                {/* Test button */}
+                <button onClick={() => playMinute15()} style={{
+                    fontSize: '0.75em',
+                    fontWeight: '500',
+                }}>Test</button>
+            </div>
+
 
             {/* Ticking Sounds */}
             <Checkbox
