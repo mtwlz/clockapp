@@ -1,0 +1,103 @@
+.clock {
+    font-weight: 500;
+    user-select: none;
+}
+
+.clock .hours {
+    font-size: 5em;
+    color: var(--color-orange);
+}
+
+.clock .minutes {
+    font-size: 5em;
+    color: var(--color-red);
+}
+
+.clock .seconds {
+    font-size: 4em;
+    color: var(--color-primary);
+}
+
+.clock .divider {
+    font-size: 4em;
+    color: var(--color-light);
+}
+
+.clock .ampm {
+    font-size: 2em;
+    margin-left: 0.5em;
+    color: var(--color-gray);
+}
+
+.analog-clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.analog-clock {
+    position: relative;
+    width: 20em;
+    height: 20em;
+    border-radius: 50%;
+    background: var(--color-dark);
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+
+.analog-clock.playing {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    animation: sound 0.5s ease-in-out infinite;
+}
+
+@keyframes sound {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.01);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(0.99);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.hour-hand {
+    position: absolute;
+    top: 50%;
+    left: 2em;
+    width: 8em;
+    height: 0.3em;
+    background: var(--color-orange);
+    transform-origin: 100%;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.minute-hand {
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    width: 9em;
+    height: 0.1em;
+    background: var(--color-red);
+    transform-origin: 100%;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.second-hand {
+    position: absolute;
+    top: 50%;
+    /* left: 50%; */
+    width: 10em;
+    height: 0.05em;
+    background: var(--color-primary);
+    transform-origin: 100%;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
