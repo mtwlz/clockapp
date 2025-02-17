@@ -1,11 +1,13 @@
-// Make a Settings context file that will handle the sound boolean state and provide that state to the rest of the app.
+// Make a Global context file that will handle the sound boolean state and provide that state to the rest of the app.
 
 import React from 'react';
 import useStickyState from '../hooks/useStickyState';
 
-const SettingsContext = React.createContext();
+const GlobalContext = React.createContext();
 
-function SettingsProvider({ children }) {
+function GlobalProvider({ children }) {
+
+    // Sticky states
     const [isTicking, setIsTicking] = useStickyState(false, 'clock-app-ticking');
     const [isSound, setIsSound] = useStickyState(false, 'clock-app-sound', (value) => {
         // Turn off ticking if sound is turned off
@@ -17,7 +19,7 @@ function SettingsProvider({ children }) {
     // Divides the volume by these numbers
     const volumeModifier = 5;
     const tickVolumeModifier = 50;
-
+    
     const [showAnalog, setShowAnalog] = useStickyState(true, 'clock-app-show-analog', (value) => {
         // If we dont' want analog, then make sure digital is shown;
         if (!value) setShowDigital(true);
@@ -29,9 +31,26 @@ function SettingsProvider({ children }) {
         if (!value) setIsTwelveHour(false);
     });
     const [showAnimations, setShowAnimations] = useStickyState(true, 'clock-app-show-animations');
+    
+    // Non-sticky states
+    const [isPlaying, setIsPlaying] = React.useState(false);
+
+    // Detect system theme
+    const getSystemTheme = () => {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark';
+        } else {
+            return 'light';
+        }
+    };
+
+    let systemTheme = getSystemTheme();
+
+    const [savedTheme, setSavedTheme] = useStickyState(systemTheme, 'clock-app-theme');
+    const theme = savedTheme === 'system' ? getSystemTheme() : savedTheme;
 
     return (
-        <SettingsContext.Provider value={{
+        <GlobalContext.Provider value={{
             isSound, setIsSound, 
             isTwelveHour, setIsTwelveHour, 
             volume, setVolume,
@@ -39,11 +58,13 @@ function SettingsProvider({ children }) {
             showAnalog, setShowAnalog,
             showDigital, setShowDigital,
             volumeModifier, tickVolumeModifier,
-            showAnimations, setShowAnimations
+            showAnimations, setShowAnimations,
+            isPlaying, setIsPlaying,
+            theme, savedTheme, setSavedTheme
         }}>
             {children}
-        </SettingsContext.Provider>
+        </GlobalContext.Provider>
     );
 }
 
-export { SettingsProvider, SettingsContext };
+export { GlobalProvider, GlobalContext };

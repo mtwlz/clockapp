@@ -20,13 +20,13 @@
 
 .clock .divider {
     font-size: 4em;
-    color: var(--color-light);
+    color: var(--color-text);
 }
 
 .clock .ampm {
     font-size: 2em;
     margin-left: 0.5em;
-    color: var(--color-gray);
+    color: var(--color-secondary);
 }
 
 .analog-clock-container {
@@ -41,7 +41,7 @@
     width: 20em;
     height: 20em;
     border-radius: 50%;
-    background: var(--color-dark);
+    background: var(--color-background);
     box-shadow: 0 0 10px var(--shadow-color);
 }
 

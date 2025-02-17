@@ -6,7 +6,7 @@ import popDown from '../sounds/ui/pop-down.mp3';
 import popOn from '../sounds/ui/pop-up-on.mp3';
 import popOff from '../sounds/ui/pop-up-off.mp3';
 
-import { SettingsContext } from '../contexts/settingsContext';
+import { GlobalContext } from '../contexts/globalContext';
 
 import '../styles/Checkbox.css';
 
@@ -21,7 +21,7 @@ function Checkbox({
   disabled,
 }) {
   const [active, setActive] = React.useState(false);
-  const { isSound } = React.useContext(SettingsContext);
+  const { isSound } = React.useContext(GlobalContext);
 
   const playActive = useSound(popDown, 0.05);
   const playOn = useSound(popOn, 0.05);

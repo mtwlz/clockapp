@@ -25,7 +25,7 @@
 
 .checkbox .visible-box {
   position: relative;
-  border: 2px solid var(--color-gray);
+  border: 2px solid var(--color-secondary);
   border-radius: 4px;
   margin-right: 8px;
   transition: border-color 0.2s ease-in-out;
@@ -33,7 +33,7 @@
 }
 
 .checkbox .input:hover + .visible-contents .visible-box {
-  border-color: var(--color-dim-blue);
+  border-color: var(--color-background2);
 }
 
 .checkbox .input:focus-visible + .visible-contents .visible-box {
@@ -61,7 +61,7 @@
 .checkbox .text {
   font-size: 1rem;
   font-family: var(--font-family);
-  color: var(--color-gray);
+  color: var(--color-secondary);
   white-space: nowrap;
 }
 
@@ -71,13 +71,13 @@
 }
 
 .checkbox.disabled .visible-box {
-  border-color: var(--color-dim-blue);
+  border-color: var(--color-background2);
 }
 
 .checkbox.disabled .input:checked + .visible-contents .visible-box .filled {
-  background: var(--color-dim-blue);
+  background: var(--color-background2);
 }
 
 .checkbox.disabled .text {
-  color: var(--color-dim-blue);
+  color: var(--color-background2);
 }

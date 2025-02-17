@@ -4,20 +4,25 @@ import Checkbox from './Checkbox';
 import tick from '../sounds/better-bells/tick.mp3';
 import minute15 from '../sounds/better-bells/15-minute.mp3';
 
-import { SettingsContext } from '../contexts/settingsContext';
+import { GlobalContext } from '../contexts/globalContext';
 import useSound from '../hooks/useSound';
 import Slider from './Slider';
+import Dropdown from './Dropdown';
+import Button from './Button';
 
-function Settings() {
-    const { isSound, setIsSound } = React.useContext(SettingsContext);
-    const { isTicking, setIsTicking } = React.useContext(SettingsContext);
-    const { volume, setVolume } = React.useContext(SettingsContext);
-    const { volumeModifier } = React.useContext(SettingsContext);
-    const { tickVolumeModifier } = React.useContext(SettingsContext);
-    const { isTwelveHour, setIsTwelveHour } = React.useContext(SettingsContext);
-    const { showAnalog, setShowAnalog } = React.useContext(SettingsContext);
-    const { showDigital, setShowDigital } = React.useContext(SettingsContext);
-    const { showAnimations, setShowAnimations } = React.useContext(SettingsContext);
+function Settings(props) {
+    const { handleShow } = props;
+    const {
+        isSound, setIsSound,
+        isTicking, setIsTicking,
+        volume, setVolume,
+        volumeModifier, tickVolumeModifier,
+        isTwelveHour, setIsTwelveHour,
+        showAnalog, setShowAnalog,
+        showDigital, setShowDigital,
+        showAnimations, setShowAnimations,
+        savedTheme, setSavedTheme
+    } = React.useContext(GlobalContext);
 
     // Sounds
     const playTick = useSound(tick, (volume || 0.01) / volumeModifier);
@@ -27,9 +32,26 @@ function Settings() {
         setVolume(e.target.value);
     };
 
+    const themeOptions = [
+        { value: 'light', label: 'Light' },
+        { value: 'dark', label: 'Dark' },
+        { value: 'system', label: 'System' },
+    ];
+
+    const changeTheme = (chosenTheme) => {
+        setSavedTheme(chosenTheme);
+    };
+
     return (
         <div className="settings">
-            <div className="subtitle">Settings</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span className="subtitle">Settings</span>
+                <Button
+                    label="X"
+                    name="close-settings"
+                    onClick={() => handleShow(false)}
+                />
+            </div>
 
             {/* Sounds On/Off */}
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -42,10 +64,7 @@ function Settings() {
                 />
 
                 {/* Test button */}
-                <button onClick={() => playMinute15()} style={{
-                    fontSize: '0.75em',
-                    fontWeight: '500',
-                }}>Test</button>
+                <Button onClick={() => playMinute15()} label="Test"></Button>
             </div>
 
 
@@ -98,18 +117,25 @@ function Settings() {
             />
 
             {/* Volume Slider */}
-            <div>
-                <Slider
-                    min={0}
-                    max={1}
-                    step={0.01}
-                    name='volume-slider'
-                    label='Volume'
-                    value={volume}
-                    onChange={changeVolume}
-                    onMouseUp={() => playTick()}
-                />
-            </div>
+            <Slider
+                min={0}
+                max={1}
+                step={0.01}
+                name='volume-slider'
+                label='Volume'
+                value={volume}
+                onChange={changeVolume}
+                onMouseUp={() => playTick()}
+            />
+
+            {/* SAVED Theme Selector */}
+            <Dropdown
+                name="theme-selector"
+                options={themeOptions}
+                selected={savedTheme}
+                onChange={changeTheme}
+                label="Theme"
+            />
         </div>
     )
 }

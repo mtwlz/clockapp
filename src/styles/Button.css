@@ -1,0 +1,42 @@
+.button {
+    background-color: var(--color-background2);
+    color: var(--color-text);
+    padding: 0.4em 0.5em;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 6em;
+    max-width: 12em;
+    border: 2px solid transparent;
+    transition: border-color 0.25s;
+    font-family: inherit;
+    border-radius: 0.8em;
+}
+
+/* Dropdown button on hover & focus */
+.button:hover,
+.button:focus {
+    border-color: var(--color-primary);
+}
+
+.button:active {
+    background-color: var(--color-background);
+    border-color: var(--color-primary-light);
+}
+
+/* Add little down arrow after label text if .dropbtn */
+.dropbtn:after {
+    content: "▼";
+    margin-left: 0.5em;
+}
+
+.dropdown.show > .dropbtn:after {
+    content: "▲";
+}
+
+.button.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+    border-color: var(--color-secondary);
+}
